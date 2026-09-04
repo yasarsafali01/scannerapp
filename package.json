@@ -1,0 +1,14 @@
+{
+  "name": "freescanner",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "web"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace backend",
+    "dev:web": "npm run dev --workspace web",
+    "start:backend": "npm run start --workspace backend"
+  }
+}

@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useRef } from "react";
 import { Image, PanResponder, StyleSheet, View } from "react-native";
 
-const HANDLE_SIZE = 26;
+const HANDLE_SIZE = 44;
+const HANDLE_HIT_SLOP = { top: 18, bottom: 18, left: 18, right: 18 };
 const EDGES = [
   [0, 1],
   [1, 2],
@@ -32,7 +33,7 @@ function EdgeLine({ from, to }) {
   );
 }
 
-function CornerHandle({ point, index, bounds, onDrag }) {
+function CornerHandle({ point, index, bounds, onDrag, onDragActive }) {
   const pointRef = useRef(point);
   pointRef.current = point;
   const startRef = useRef(point);
@@ -41,27 +42,41 @@ function CornerHandle({ point, index, bounds, onDrag }) {
     () =>
       PanResponder.create({
         onStartShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderTerminationRequest: () => false,
         onPanResponderGrant: () => {
           startRef.current = pointRef.current;
+          onDragActive?.(true);
         },
         onPanResponderMove: (_evt, gesture) => {
           const x = Math.max(0, Math.min(bounds.width, startRef.current.x + gesture.dx));
           const y = Math.max(0, Math.min(bounds.height, startRef.current.y + gesture.dy));
           onDrag(index, { x, y });
         },
+        onPanResponderRelease: () => onDragActive?.(false),
+        onPanResponderTerminate: () => onDragActive?.(false),
       }),
-    [bounds.width, bounds.height, index, onDrag]
+    [bounds.width, bounds.height, index, onDrag, onDragActive]
   );
 
   return (
     <View
       {...pan.panHandlers}
+      hitSlop={HANDLE_HIT_SLOP}
       style={[styles.handle, { left: point.x - HANDLE_SIZE / 2, top: point.y - HANDLE_SIZE / 2 }]}
     />
   );
 }
 
-export default function CornerEditor({ uri, naturalWidth, naturalHeight, displayWidth, corners, onChange }) {
+export default function CornerEditor({
+  uri,
+  naturalWidth,
+  naturalHeight,
+  displayWidth,
+  corners,
+  onChange,
+  onDragActive,
+}) {
   const scale = displayWidth / naturalWidth;
   const displayHeight = naturalHeight * scale;
   const displayCorners = corners.map((c) => ({ x: c.x * scale, y: c.y * scale }));
@@ -88,6 +103,7 @@ export default function CornerEditor({ uri, naturalWidth, naturalHeight, display
           index={i}
           bounds={{ width: displayWidth, height: displayHeight }}
           onDrag={handleDrag}
+          onDragActive={onDragActive}
         />
       ))}
     </View>
@@ -101,7 +117,7 @@ const styles = StyleSheet.create({
     height: HANDLE_SIZE,
     borderRadius: HANDLE_SIZE / 2,
     backgroundColor: "#1d4ed8",
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: "#fff",
   },
 });

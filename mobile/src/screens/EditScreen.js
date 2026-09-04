@@ -42,6 +42,7 @@ export default function EditScreen({ route, navigation }) {
   const [mode, setMode] = useState("bw");
   const [ocr, setOcr] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [scrollEnabled, setScrollEnabled] = useState(true);
 
   async function handleScan() {
     setLoading(true);
@@ -69,7 +70,7 @@ export default function EditScreen({ route, navigation }) {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.page}>
+    <ScrollView contentContainerStyle={styles.page} scrollEnabled={scrollEnabled}>
       <CornerEditor
         uri={asset.uri}
         naturalWidth={asset.width}
@@ -77,6 +78,7 @@ export default function EditScreen({ route, navigation }) {
         displayWidth={DISPLAY_WIDTH}
         corners={corners}
         onChange={setCorners}
+        onDragActive={(active) => setScrollEnabled(!active)}
       />
       <Text style={styles.hint}>Köşeleri belgenin kenarlarına sürükleyin.</Text>
 

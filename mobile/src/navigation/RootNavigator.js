@@ -5,6 +5,7 @@ import { Text } from "react-native";
 
 import HomeScreen from "../screens/HomeScreen";
 import EditScreen from "../screens/EditScreen";
+import MultiScanScreen from "../screens/MultiScanScreen";
 import ResultScreen from "../screens/ResultScreen";
 import HistoryScreen from "../screens/HistoryScreen";
 
@@ -17,6 +18,7 @@ function ScanStackScreen() {
     <ScanStack.Navigator>
       <ScanStack.Screen name="ScanHome" component={HomeScreen} options={{ title: "FreeScanner" }} />
       <ScanStack.Screen name="Edit" component={EditScreen} options={{ title: "Köşeleri Ayarla" }} />
+      <ScanStack.Screen name="MultiScan" component={MultiScanScreen} options={{ title: "Çoklu Sayfa Tara" }} />
       <ScanStack.Screen name="Result" component={ResultScreen} options={{ title: "Sonuç" }} />
     </ScanStack.Navigator>
   );

@@ -37,7 +37,15 @@ function CornerHandle({ point, index, bounds, onDrag, onDragActive }) {
   const pointRef = useRef(point);
   pointRef.current = point;
   const startRef = useRef(point);
+  const onDragRef = useRef(onDrag);
+  onDragRef.current = onDrag;
+  const onDragActiveRef = useRef(onDragActive);
+  onDragActiveRef.current = onDragActive;
 
+  // onDrag/onDragActive change on every corner move (parent state updates each
+  // frame). Reading them via refs keeps this PanResponder stable for the whole
+  // gesture — recreating it mid-drag resets its internal dx/dy tracking and
+  // makes the handle freeze after the first pixel of movement.
   const pan = useMemo(
     () =>
       PanResponder.create({
@@ -46,17 +54,17 @@ function CornerHandle({ point, index, bounds, onDrag, onDragActive }) {
         onPanResponderTerminationRequest: () => false,
         onPanResponderGrant: () => {
           startRef.current = pointRef.current;
-          onDragActive?.(true);
+          onDragActiveRef.current?.(true);
         },
         onPanResponderMove: (_evt, gesture) => {
           const x = Math.max(0, Math.min(bounds.width, startRef.current.x + gesture.dx));
           const y = Math.max(0, Math.min(bounds.height, startRef.current.y + gesture.dy));
-          onDrag(index, { x, y });
+          onDragRef.current(index, { x, y });
         },
-        onPanResponderRelease: () => onDragActive?.(false),
-        onPanResponderTerminate: () => onDragActive?.(false),
+        onPanResponderRelease: () => onDragActiveRef.current?.(false),
+        onPanResponderTerminate: () => onDragActiveRef.current?.(false),
       }),
-    [bounds.width, bounds.height, index, onDrag, onDragActive]
+    [bounds.width, bounds.height, index]
   );
 
   return (

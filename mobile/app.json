@@ -2,7 +2,7 @@
   "expo": {
     "name": "mobile",
     "slug": "mobile",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -16,13 +16,22 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "package": "com.anonymous.mobile"
+      "package": "com.anonymous.mobile",
+      "versionCode": 10
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-sharing",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Taranan sayfaları galerinize kaydetmek için izin gerekli.",
+          "savePhotosPermission": "Taranan sayfaları galerinize kaydetmek için izin gerekli.",
+          "isAccessMediaLocationEnabled": false
+        }
+      ],
       [
         "expo-build-properties",
         {
@@ -31,6 +40,12 @@
           }
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5974a233-d01e-412c-a2c1-d8bc6963e63a"
+      }
+    },
+    "owner": "yasarsafali"
   }
 }

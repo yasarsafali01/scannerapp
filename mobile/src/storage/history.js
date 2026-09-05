@@ -23,12 +23,15 @@ export async function getHistory() {
   }
 }
 
-export async function saveScan({ image, pdf, text, mode }) {
+export async function saveScan({ images, pdf, text, mode, pageCount }) {
   const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   const dir = scansDir();
 
-  const jpegFile = new File(dir, `${id}.jpg`);
-  jpegFile.write(base64FromDataUri(image), { encoding: "base64" });
+  const imageUris = images.map((image, i) => {
+    const jpegFile = new File(dir, `${id}-${i}.jpg`);
+    jpegFile.write(base64FromDataUri(image), { encoding: "base64" });
+    return jpegFile.uri;
+  });
 
   const pdfFile = new File(dir, `${id}.pdf`);
   pdfFile.write(base64FromDataUri(pdf), { encoding: "base64" });
@@ -38,8 +41,11 @@ export async function saveScan({ image, pdf, text, mode }) {
     date: new Date().toISOString(),
     mode,
     text,
-    imageUri: jpegFile.uri,
+    imageUri: imageUris[0],
+    imageUris,
     pdfUri: pdfFile.uri,
+    pageCount: pageCount || imageUris.length,
+    name: null,
   };
 
   const history = [entry, ...(await getHistory())].slice(0, MAX_ITEMS);
@@ -47,14 +53,25 @@ export async function saveScan({ image, pdf, text, mode }) {
   return entry;
 }
 
+export async function renameScan(id, name) {
+  const history = await getHistory();
+  const trimmed = (name || "").trim();
+  const next = history.map((e) => (e.id === id ? { ...e, name: trimmed || null } : e));
+  await AsyncStorage.setItem(INDEX_KEY, JSON.stringify(next));
+  return next.find((e) => e.id === id);
+}
+
 export async function deleteScan(id) {
   const history = await getHistory();
   const entry = history.find((e) => e.id === id);
   if (entry) {
-    try {
-      new File(entry.imageUri).delete();
-    } catch {
-      // dosya zaten silinmis olabilir
+    const uris = entry.imageUris || (entry.imageUri ? [entry.imageUri] : []);
+    for (const uri of uris) {
+      try {
+        new File(uri).delete();
+      } catch {
+        // dosya zaten silinmis olabilir
+      }
     }
     try {
       new File(entry.pdfUri).delete();

@@ -1,3 +1,21 @@
+import sharp from "sharp";
+
+const VALID_ROTATIONS = new Set([0, 90, 180, 270]);
+
+export async function rotateRaw({ data, width, height }, degrees) {
+  const normalized = VALID_ROTATIONS.has(Number(degrees)) ? Number(degrees) : 0;
+  if (!normalized) return { data, width, height };
+
+  const { data: rotated, info } = await sharp(Buffer.from(data), {
+    raw: { width, height, channels: 4 },
+  })
+    .rotate(normalized)
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  return { data: rotated, width: info.width, height: info.height };
+}
+
 function orderCorners(points) {
   const sums = points.map((p) => p.x + p.y);
   const diffs = points.map((p) => p.x - p.y);

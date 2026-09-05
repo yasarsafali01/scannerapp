@@ -32,6 +32,8 @@ Thumbs.db
 backend/uploads/
 backend/tmp/
 *.tsbuildinfo
+.tmp/
+backend/bigphoto*.jpg
 
 # Tesseract.js'in ilk çalıştırmada indirdiği OCR dil dosyaları
 backend/*.traineddata

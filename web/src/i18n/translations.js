@@ -22,7 +22,7 @@ export const translations = {
     titles: { home: "FreeScanner", edit: "Köşeleri Ayarla", multiscan: "Çoklu Sayfa Tara", result: "Sonuç", history: "Taramalarım" },
     common: { cancel: "Vazgeç", save: "Kaydet", delete: "Sil", close: "Kapat", error: "Hata", ok: "Tamam", permissionRequired: "İzin gerekli" },
     theme: { light: "Açık", dark: "Koyu", label: "Tema" },
-    language: { label: "Dil" },
+    language: { label: "Dil", selectPrompt: "Dil Seçin" },
     modes: { bw: "Siyah-Beyaz", gray: "Gri Tonlama", color: "Renkli" },
     home: {
       greeting: "Merhaba 👋",
@@ -119,7 +119,7 @@ export const translations = {
     titles: { home: "FreeScanner", edit: "Adjust Corners", multiscan: "Multi-Page Scan", result: "Result", history: "My Scans" },
     common: { cancel: "Cancel", save: "Save", delete: "Delete", close: "Close", error: "Error", ok: "OK", permissionRequired: "Permission required" },
     theme: { light: "Light", dark: "Dark", label: "Theme" },
-    language: { label: "Language" },
+    language: { label: "Language", selectPrompt: "Select Language" },
     modes: { bw: "Black & White", gray: "Grayscale", color: "Color" },
     home: {
       greeting: "Hello 👋",
@@ -216,7 +216,7 @@ export const translations = {
     titles: { home: "FreeScanner", edit: "Настройка углов", multiscan: "Скан нескольких страниц", result: "Результат", history: "Мои сканы" },
     common: { cancel: "Отмена", save: "Сохранить", delete: "Удалить", close: "Закрыть", error: "Ошибка", ok: "ОК", permissionRequired: "Требуется разрешение" },
     theme: { light: "Светлая", dark: "Тёмная", label: "Тема" },
-    language: { label: "Язык" },
+    language: { label: "Язык", selectPrompt: "Выберите язык" },
     modes: { bw: "Ч/Б", gray: "Оттенки серого", color: "Цветной" },
     home: {
       greeting: "Привет 👋",
@@ -313,7 +313,7 @@ export const translations = {
     titles: { home: "FreeScanner", edit: "ضبط الزوايا", multiscan: "مسح متعدد الصفحات", result: "النتيجة", history: "مسحوباتي" },
     common: { cancel: "إلغاء", save: "حفظ", delete: "حذف", close: "إغلاق", error: "خطأ", ok: "حسنًا", permissionRequired: "الإذن مطلوب" },
     theme: { light: "فاتح", dark: "داكن", label: "المظهر" },
-    language: { label: "اللغة" },
+    language: { label: "اللغة", selectPrompt: "اختر اللغة" },
     modes: { bw: "أبيض وأسود", gray: "تدرج رمادي", color: "ملون" },
     home: {
       greeting: "مرحبًا 👋",
@@ -410,7 +410,7 @@ export const translations = {
     titles: { home: "FreeScanner", edit: "调整边角", multiscan: "多页扫描", result: "结果", history: "我的扫描" },
     common: { cancel: "取消", save: "保存", delete: "删除", close: "关闭", error: "错误", ok: "好", permissionRequired: "需要权限" },
     theme: { light: "浅色", dark: "深色", label: "主题" },
-    language: { label: "语言" },
+    language: { label: "语言", selectPrompt: "选择语言" },
     modes: { bw: "黑白", gray: "灰度", color: "彩色" },
     home: {
       greeting: "你好 👋",
@@ -507,7 +507,7 @@ export const translations = {
     titles: { home: "FreeScanner", edit: "Ecken anpassen", multiscan: "Mehrseitiger Scan", result: "Ergebnis", history: "Meine Scans" },
     common: { cancel: "Abbrechen", save: "Speichern", delete: "Löschen", close: "Schließen", error: "Fehler", ok: "OK", permissionRequired: "Berechtigung erforderlich" },
     theme: { light: "Hell", dark: "Dunkel", label: "Design" },
-    language: { label: "Sprache" },
+    language: { label: "Sprache", selectPrompt: "Sprache wählen" },
     modes: { bw: "Schwarz-Weiß", gray: "Graustufen", color: "Farbig" },
     home: {
       greeting: "Hallo 👋",
@@ -604,7 +604,7 @@ export const translations = {
     titles: { home: "FreeScanner", edit: "Ajuster les coins", multiscan: "Scan multi-pages", result: "Résultat", history: "Mes scans" },
     common: { cancel: "Annuler", save: "Enregistrer", delete: "Supprimer", close: "Fermer", error: "Erreur", ok: "OK", permissionRequired: "Autorisation requise" },
     theme: { light: "Clair", dark: "Sombre", label: "Thème" },
-    language: { label: "Langue" },
+    language: { label: "Langue", selectPrompt: "Choisir la langue" },
     modes: { bw: "Noir et blanc", gray: "Niveaux de gris", color: "Couleur" },
     home: {
       greeting: "Bonjour 👋",
@@ -701,7 +701,7 @@ export const translations = {
     titles: { home: "FreeScanner", edit: "Regola gli angoli", multiscan: "Scansione multipagina", result: "Risultato", history: "Le mie scansioni" },
     common: { cancel: "Annulla", save: "Salva", delete: "Elimina", close: "Chiudi", error: "Errore", ok: "OK", permissionRequired: "Autorizzazione richiesta" },
     theme: { light: "Chiaro", dark: "Scuro", label: "Tema" },
-    language: { label: "Lingua" },
+    language: { label: "Lingua", selectPrompt: "Seleziona la lingua" },
     modes: { bw: "Bianco e nero", gray: "Scala di grigi", color: "Colore" },
     home: {
       greeting: "Ciao 👋",
